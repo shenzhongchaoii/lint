@@ -51,7 +51,7 @@ export const createCacheLog = async (
   } fail 4 total`
 
   const timeStr = `${
-    Math.round((Date.now() - taskRecordData.startTime) * 1000) / 1000
+    Math.round((Date.now() - taskRecordData.startTime) * 1000) / 1000 / 1000
   }s`
 
   const logs: [Content[], string, string, string] = [
