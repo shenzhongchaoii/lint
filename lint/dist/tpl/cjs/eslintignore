@@ -1,0 +1,6 @@
+node_modules
+dist
+!.\_
+**/nieplayer.js
+**/types/auto-imports.d.ts
+**/types/components.d.ts

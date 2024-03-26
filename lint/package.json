@@ -1,0 +1,54 @@
+{
+  "name": "@tttiga/lint",
+  "author": "shenzhongchaoii",
+  "license": "MIT",
+  "version": "0.0.1",
+  "description": "用于集成 eslint、prettier、stylelint、lint-staged、husky、commitlint 配置文件、添加 lint scripts 命令等的自定义指令",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shenzhongchaoii/vite-plugin-preset-inline-px-to-viewport"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "bin": {
+    "tttiga-lint": "./dist/index.mjs"
+  },
+  "scripts": {
+    "copy": "node ./src/lib/copy-tpl.js",
+    "stub": "unbuild --stub && pnpm copy",
+    "build:lint": "unbuild && pnpm copy"
+  },
+  "peerDependencies": {},
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "child_process": "^1.0.2",
+    "commander": "^11.1.0",
+    "fast-glob": "^3.3.1",
+    "fs-extra": "^10.1.0",
+    "path": "^0.12.7",
+    "util": "^0.12.5",
+    "@tttiga/eslint-config": "latest",
+    "@tttiga/stylelint-config": "latest",
+    "@commitlint/cli": "^19.2.1",
+    "@commitlint/config-conventional": "^19.1.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.13"
+  }
+}

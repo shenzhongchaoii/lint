@@ -1,0 +1,10 @@
+node_modules
+dist
+!.\_
+coverage
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+**/nieplayer.js
+**/types/auto-imports.d.ts
+**/types/components.d.ts
