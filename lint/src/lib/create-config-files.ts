@@ -9,7 +9,7 @@ const copyFiles = ({
 }: Record<'files', string[]> & Record<'destDir', string>) => {
   return Promise.all(
     files.map(file => {
-      const dest = path.resolve(destDir, `.${path.basename(file)}`)
+      const dest = path.resolve(destDir, path.basename(file))
       return fs.copyFile(file, dest)
     })
   )
@@ -26,7 +26,8 @@ const createConfigFile = async () => {
   const files = await glob('**/*', {
     cwd: source,
     absolute: true,
-    onlyFiles: true
+    onlyFiles: true,
+    dot: true
   })
 
   return copyFiles({

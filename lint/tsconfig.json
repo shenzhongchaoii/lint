@@ -1,6 +1,6 @@
 {
   "include": ["src"],
-  "exclude": ["**/*.spec.ts"],
+  "exclude": ["**/*.spec.ts", "src/tpl/**.*"],
   "compilerOptions": {
     "outDir": "dist",
     "target": "ES2020",

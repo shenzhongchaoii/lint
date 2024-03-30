@@ -25,7 +25,7 @@ export default {
      * type[scope]: [function] description
      *      ^^^^^
      */
-    'scope-enum': [2, 'always', scopes],
+    'scope-enum': [2, 'always'],
     'scope-case': [2, 'always', 'lower-case'],
     'subject-case': [
       1,
