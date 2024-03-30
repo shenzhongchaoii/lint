@@ -49,6 +49,7 @@
     "lint-staged": "^15.2.2"
   },
   "devDependencies": {
-    "@types/fs-extra": "^9.0.13"
+    "@types/fs-extra": "^9.0.13",
+    "unbuild": "^2.0.0"
   }
 }
