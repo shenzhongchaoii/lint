@@ -1,7 +1,7 @@
 import fs from 'fs-extra'
 import glob from 'fast-glob'
 import path from 'path'
-import log, { type Content } from './log'
+import log from './log'
 
 const copyFiles = ({
   files,
@@ -36,54 +36,27 @@ const createConfigFile = async () => {
   })
 }
 
-const logs: Content[][] = [
-  [
-    {
-      color: 'blue',
-      text: '@tttiga/lint: tttiga-lint install: '
-    },
-    {
-      color: 'blue',
-      text: 'ℹ '
-    },
-    {
-      color: 'white',
-      text: 'Generating configuration files'
-    }
-  ],
-  [
-    {
-      color: 'blue',
-      text: '@tttiga/lint: tttiga-lint install: '
-    },
-    {
-      color: 'green',
-      text: '✔ '
-    },
-    {
-      color: 'white',
-      text: 'Generate successful for .eslintrc.js, .eslintignore, .prettierrc.js, .prettierignore, .stylelintrc.js, .stylelintignore, .lintstagedrc.js, .commitlintrc.js, .huskyrc.js, .husky/'
-    }
-  ]
-]
-
 export const createConfigFiles = async (): Promise<
   Record<'successful' | 'fail', number> & Partial<Record<'logs', string[]>>
 > => {
-  log(logs[0])
+  log(
+    `{blue @tttiga/lint: tttiga-lint install: ℹ }Generating configuration files`
+  )
 
   let result
   try {
     await createConfigFile()
 
-    log(logs[1])
+    log(
+      `{blue @tttiga/lint: tttiga-lint install: }{green ✔ }Generate successful for .eslintrc.js, .eslintignore, .prettierrc.js, .prettierignore, .stylelintrc.js, .stylelintignore, .lintstagedrc.js, .commitlintrc.js, .huskyrc.js, .husky/`
+    )
 
     result = {
       successful: 1,
       fail: 0,
       logs: [
-        logs[0].map(ele => ele.text).join(''),
-        logs[1].map(ele => ele.text).join('')
+        '@tttiga/lint: tttiga-lint install: ℹ Generating configuration files',
+        '@tttiga/lint: tttiga-lint install: ✔ Generate successful for .eslintrc.js, .eslintignore, .prettierrc.js, .prettierignore, .stylelintrc.js, .stylelintignore, .lintstagedrc.js, .commitlintrc.js, .huskyrc.js, .husky/'
       ]
     }
   } catch {

@@ -1,42 +1,12 @@
 import fs from 'fs-extra'
-import log, { type Content } from './log'
-
-const logs: Content[][] = [
-  [
-    {
-      color: 'blue',
-      text: '@tttiga/lint: tttiga-lint install: '
-    },
-    {
-      color: 'blue',
-      text: 'ℹ '
-    },
-    {
-      color: 'white',
-      text: 'Adding scripts to package.json'
-    }
-  ],
-  [
-    {
-      color: 'blue',
-      text: '@tttiga/lint: tttiga-lint install: '
-    },
-    {
-      color: 'green',
-      text: '✔ '
-    },
-    {
-      color: 'white',
-      text: 'Add successful for scripts["prepare"], scripts["lint:eslint"], scripts["lint:prettier"], , scripts["lint:stylelint"], scripts["lint:lint-staged"], scripts["lint"]'
-    }
-  ]
-]
+import log from './log'
 
 export const addScripts = async (): Promise<
   Record<'successful' | 'fail', number> & Partial<Record<'logs', string[]>>
 > => {
-  log(logs[0])
-
+  log(
+    `{blue @tttiga/lint: tttiga-lint install: ℹ }Adding scripts to package.json`
+  )
   let result
   try {
     const json = await fs.readFile('package.json', 'utf-8')
@@ -55,14 +25,16 @@ export const addScripts = async (): Promise<
     const modifiedJson = JSON.stringify(data, null, 2)
     await fs.writeFile('package.json', modifiedJson, 'utf8')
 
-    log(logs[1])
+    log(
+      `{blue @tttiga/lint: tttiga-lint install: }{green ✔ }Add successful for scripts["prepare"], scripts["lint:eslint"], scripts["lint:prettier"], , scripts["lint:stylelint"], scripts["lint:lint-staged"], scripts["lint"]`
+    )
 
     result = {
       successful: 1,
       fail: 0,
       logs: [
-        logs[0].map(ele => ele.text).join(''),
-        logs[1].map(ele => ele.text).join('')
+        '@tttiga/lint: tttiga-lint install: ℹ Adding scripts to package.json',
+        '@tttiga/lint: tttiga-lint install: ✔ Add successful for scripts["prepare"], scripts["lint:eslint"], scripts["lint:prettier"], , scripts["lint:stylelint"], scripts["lint:lint-staged"], scripts["lint"]'
       ]
     }
   } catch {

@@ -2,40 +2,9 @@ import util from 'util'
 import { exec } from 'child_process'
 import fs from 'fs-extra'
 import path from 'path'
-import log, { type Content } from './log'
+import log from './log'
 
 export const processExec = util.promisify(exec)
-
-const logs: Content[][] = [
-  [
-    {
-      color: 'blue',
-      text: '@tttiga/lint: tttiga-lint install: '
-    },
-    {
-      color: 'blue',
-      text: 'ℹ '
-    },
-    {
-      color: 'white',
-      text: "Generating husky's configuration files"
-    }
-  ],
-  [
-    {
-      color: 'blue',
-      text: '@tttiga/lint: tttiga-lint install: '
-    },
-    {
-      color: 'green',
-      text: '✔ '
-    },
-    {
-      color: 'white',
-      text: "Generate successful for husky's configuration files"
-    }
-  ]
-]
 
 const files = [
   'pre-commit',
@@ -93,19 +62,23 @@ const createFiles = async (dir = '.husky') => {
 export const createHuskyFiles = async (): Promise<
   Record<'successful' | 'fail', number> & Partial<Record<'logs', string[]>>
 > => {
-  log(logs[0])
+  log(
+    `{blue @tttiga/lint: tttiga-lint install: ℹ }Generating husky's configuration files`
+  )
 
   // 安装
   await createFiles()
 
-  log(logs[1])
+  log(
+    `{blue @tttiga/lint: tttiga-lint install: }{green ✔ }Generate successful for husky's configuration files`
+  )
 
   return {
     successful: 1,
     fail: 0,
     logs: [
-      logs[0].map(ele => ele.text).join(''),
-      logs[1].map(ele => ele.text).join('')
+      "@tttiga/lint: tttiga-lint install: ℹ Generating husky's configuration files",
+      "@tttiga/lint: tttiga-lint install: ✔ Generate successful for husky's configuration files"
     ]
   }
 }

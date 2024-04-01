@@ -6,7 +6,7 @@ import {
   createCacheLog,
   type TaskRecordData
 } from './create-cache-log'
-import log, { type Content } from './log'
+import log from './log'
 import path from 'path'
 
 const taskRecord = () => {
@@ -18,7 +18,7 @@ const taskRecord = () => {
     },
     logs: [
       '· Running tttiga-lint install',
-      `@tttiga/lint: tttiga-lint install: > @tttiga/lint@0.0.1 tttiga-lint install ${process.cwd()}`
+      `@tttiga/lint: tttiga-lint install: > @tttiga/lint tttiga-lint install ${process.cwd()}`
     ]
   }
   return {
@@ -37,26 +37,13 @@ const taskRecord = () => {
   }
 }
 
-const logs: [string, Content[]] = [
-  '· Running tttiga-lint install',
-  [
-    {
-      color: 'blue',
-      text: '@tttiga/lint: tttiga-lint install: '
-    },
-    {
-      color: 'white',
-      text: `> @tttiga/lint@0.0.1 tttiga-lint install ${process.cwd()}`
-    }
-  ]
-]
-
 /**
  * @description 生成配置文件、添加 lint scripts 命令
  */
 const generate = async (): Promise<void> => {
-  log(logs[0])
-  log(logs[1])
+  log(
+    `· Running tttiga-lint install\n{blue @tttiga/lint: tttiga-lint install: }> @tttiga/lint tttiga-lint install ${process.cwd()}`
+  )
 
   const cacheLogStat = await checkCacheLog()
 
@@ -68,20 +55,9 @@ const generate = async (): Promise<void> => {
 
     createCacheLog(data, cacheLogStat)
   } else {
-    log([
-      {
-        color: 'blue',
-        text: '@tttiga/lint: tttiga-lint install: '
-      },
-      {
-        color: 'red',
-        text: 'Break: Cache log file exists: '
-      },
-      {
-        color: 'blue',
-        text: `${path.join(process.cwd(), 'tttiga-lint/cache.log')}`
-      }
-    ])
+    log(
+      `{blue @tttiga/lint: tttiga-lint install: }{red Break: Cache log file exists: }{blue ${path.join(process.cwd(), 'tttiga-lint/cache.log')}}`
+    )
   }
 }
 

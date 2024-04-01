@@ -5,14 +5,9 @@ export interface Content {
   text: string
 }
 
-export const log = (content: Content[] | string) => {
-  const message =
-    typeof content === 'string'
-      ? chalk.white(content)
-      : content.map(ele => chalk[ele.color](ele.text)).join('')
-
+export const log = (text: string) => {
   // @eslint-disabled-next-line
-  console.log(message)
+  console.log(chalk`${text}`)
 }
 
 export default log
