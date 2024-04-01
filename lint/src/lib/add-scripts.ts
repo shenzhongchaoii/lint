@@ -1,11 +1,11 @@
 import fs from 'fs-extra'
-import log from './log'
+import chalk from 'chalk'
 
 export const addScripts = async (): Promise<
   Record<'successful' | 'fail', number> & Partial<Record<'logs', string[]>>
 > => {
-  log(
-    `{blue @tttiga/lint: tttiga-lint install: ℹ }Adding scripts to package.json`
+  console.log(
+    `${chalk.blue('@tttiga/lint: tttiga-lint install: ℹ ')}Adding scripts to package.json`
   )
   let result
   try {
@@ -25,8 +25,8 @@ export const addScripts = async (): Promise<
     const modifiedJson = JSON.stringify(data, null, 2)
     await fs.writeFile('package.json', modifiedJson, 'utf8')
 
-    log(
-      `{blue @tttiga/lint: tttiga-lint install: }{green ✔ }Add successful for scripts["prepare"], scripts["lint:eslint"], scripts["lint:prettier"], , scripts["lint:stylelint"], scripts["lint:lint-staged"], scripts["lint"]`
+    console.log(
+      `${chalk.blue('@tttiga/lint: tttiga-lint install: ')}${chalk.green('✔ ')}Add successful for scripts["prepare"], scripts["lint:eslint"], scripts["lint:prettier"], , scripts["lint:stylelint"], scripts["lint:lint-staged"], scripts["lint"]`
     )
 
     result = {

@@ -1,5 +1,5 @@
 import fs from 'fs-extra'
-import log from './log'
+import chalk from 'chalk'
 
 /**
  * @description 获取文件或目录的状态
@@ -54,8 +54,8 @@ export const createCacheLog = async (
     Math.round((Date.now() - taskRecordData.startTime) * 1000) / 1000 / 1000
   }s`
 
-  log(
-    `{blue @tttiga/lint: tttiga-lint install: }Σ Generate successful for .tttiga-lint/cache.log successful`
+  console.log(
+    `${chalk.blue('@tttiga/lint: tttiga-lint install: ')}Σ Generate successful for .tttiga-lint/cache.log successful`
   )
 
   logText += `
@@ -66,7 +66,9 @@ Cached:    1 cached, 1 total
 Time:    ${timeStr}
   `
   await fs.writeFile('.tttiga-lint/cache.log', logText, 'utf8')
-  log(`Tasks:    ${taskStr}\nCached:    1 cached, 1 total\nTime:    ${timeStr}`)
+  console.log(
+    `Tasks:    ${taskStr}\nCached:    1 cached, 1 total\nTime:    ${timeStr}`
+  )
 }
 
 export default createCacheLog

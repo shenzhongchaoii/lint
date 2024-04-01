@@ -1,7 +1,7 @@
 import fs from 'fs-extra'
 import glob from 'fast-glob'
 import path from 'path'
-import log from './log'
+import chalk from 'chalk'
 
 const copyFiles = ({
   files,
@@ -39,16 +39,16 @@ const createConfigFile = async () => {
 export const createConfigFiles = async (): Promise<
   Record<'successful' | 'fail', number> & Partial<Record<'logs', string[]>>
 > => {
-  log(
-    `{blue @tttiga/lint: tttiga-lint install: ℹ }Generating configuration files`
+  console.log(
+    `${chalk.blue('@tttiga/lint: tttiga-lint install: ℹ ')}Generating configuration files`
   )
 
   let result
   try {
     await createConfigFile()
 
-    log(
-      `{blue @tttiga/lint: tttiga-lint install: }{green ✔ }Generate successful for .eslintrc.js, .eslintignore, .prettierrc.js, .prettierignore, .stylelintrc.js, .stylelintignore, .lintstagedrc.js, .commitlintrc.js, .huskyrc.js, .husky/`
+    console.log(
+      `${chalk.blue('@tttiga/lint: tttiga-lint install: ')}${chalk.green('✔ ')}Generate successful for .eslintrc.js, .eslintignore, .prettierrc.js, .prettierignore, .stylelintrc.js, .stylelintignore, .lintstagedrc.js, .commitlintrc.js, .huskyrc.js, .husky/`
     )
 
     result = {

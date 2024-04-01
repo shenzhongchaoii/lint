@@ -6,8 +6,8 @@ import {
   createCacheLog,
   type TaskRecordData
 } from './create-cache-log'
-import log from './log'
 import path from 'path'
+import chalk from 'chalk'
 
 const taskRecord = () => {
   const data: TaskRecordData = {
@@ -41,8 +41,8 @@ const taskRecord = () => {
  * @description 生成配置文件、添加 lint scripts 命令
  */
 const generate = async (): Promise<void> => {
-  log(
-    `· Running tttiga-lint install\n{blue @tttiga/lint: tttiga-lint install: }> @tttiga/lint tttiga-lint install ${process.cwd()}`
+  console.log(
+    `· Running tttiga-lint install\n${chalk.blue('@tttiga/lint: tttiga-lint install: ')}> @tttiga/lint tttiga-lint install ${process.cwd()}`
   )
 
   const cacheLogStat = await checkCacheLog()
@@ -55,8 +55,8 @@ const generate = async (): Promise<void> => {
 
     createCacheLog(data, cacheLogStat)
   } else {
-    log(
-      `{blue @tttiga/lint: tttiga-lint install: }{red Break: Cache log file exists: }{blue ${path.join(process.cwd(), 'tttiga-lint/cache.log')}}`
+    console.log(
+      `${chalk.blue('@tttiga/lint: tttiga-lint install: ')}${chalk.red('Break: Cache log file exists: ')}${chalk.blue(path.join(process.cwd(), 'tttiga-lint/cache.log'))}`
     )
   }
 }

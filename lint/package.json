@@ -2,7 +2,7 @@
   "name": "@tttiga/lint",
   "author": "shenzhongchaoii",
   "license": "MIT",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "用于集成 eslint、prettier、stylelint、lint-staged、husky、commitlint 配置文件、添加 lint scripts 命令等的自定义指令",
   "publishConfig": {
     "access": "public",

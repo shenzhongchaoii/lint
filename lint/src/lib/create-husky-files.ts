@@ -2,7 +2,7 @@ import util from 'util'
 import { exec } from 'child_process'
 import fs from 'fs-extra'
 import path from 'path'
-import log from './log'
+import chalk from 'chalk'
 
 export const processExec = util.promisify(exec)
 
@@ -62,15 +62,15 @@ const createFiles = async (dir = '.husky') => {
 export const createHuskyFiles = async (): Promise<
   Record<'successful' | 'fail', number> & Partial<Record<'logs', string[]>>
 > => {
-  log(
-    `{blue @tttiga/lint: tttiga-lint install: ℹ }Generating husky's configuration files`
+  console.log(
+    `${chalk.blue('@tttiga/lint: tttiga-lint install: ℹ ')}Generating husky's configuration files`
   )
 
   // 安装
   await createFiles()
 
-  log(
-    `{blue @tttiga/lint: tttiga-lint install: }{green ✔ }Generate successful for husky's configuration files`
+  console.log(
+    `${chalk.blue('@tttiga/lint: tttiga-lint install: ')}${chalk.green('✔ ')}Generate successful for husky's configuration files`
   )
 
   return {
